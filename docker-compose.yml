@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=demo123
+      - POSTGRES_DB=data
+    volumes:
+      - /home/sfl/devel/personal/database-access/data/:/docker-entrypoint-initdb.d/
