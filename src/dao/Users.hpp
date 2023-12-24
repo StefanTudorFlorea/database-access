@@ -6,6 +6,7 @@
 // cpp
 #include <string>
 #include <vector>
+#include <optional>
 
 namespace dao {
 
@@ -13,7 +14,7 @@ class Users {
 public:
     virtual std::vector<entity::User> getUsers() = 0;
 
-    // virtual entity::User getUser(int id) = 0;
+    virtual std::optional<entity::User> getUser(int id) = 0;
 
     // virtual void removeUser(int id) = 0;
 

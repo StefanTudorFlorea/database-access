@@ -33,7 +33,7 @@ public:
         return users;
     }
 
-    std::optional<entity::User> getUser(int id) {
+    std::optional<entity::User> getUser(int id) override {
 
         // query
         std::string query = fmt::format("SELECT id,name,age FROM user_ WHERE id = {}", id);
