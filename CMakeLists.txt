@@ -12,6 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 find_package(fmt     CONFIG REQUIRED)
 find_package(libpqxx CONFIG REQUIRED)
 find_package(doctest CONFIG REQUIRED)
+find_package(redis++ CONFIG REQUIRED)
 
 # include
 add_subdirectory(src/)

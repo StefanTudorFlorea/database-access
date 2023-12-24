@@ -8,5 +8,6 @@ target_include_directories(database-access INTERFACE .)
 target_link_libraries(database-access
     INTERFACE
         fmt::fmt-header-only
-        libpqxx::pqxx       
+        libpqxx::pqxx
+        redis++::redis++_static       
 )

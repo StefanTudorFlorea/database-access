@@ -2,8 +2,9 @@
     "name": "application",
     "version": "1.0",
     "dependencies": [
-      "libpqxx",
       "fmt",
+      "libpqxx",
+      "redis-plus-plus",
       "doctest"
     ]
 }

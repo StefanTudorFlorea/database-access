@@ -12,7 +12,7 @@
 
 
 TEST_CASE("Redis") {
-    // dao::UsersRedis access;
+    dao::UsersRedis access;
 
     SUBCASE("getAllUsers") {
     //     std::vector<entity::User> users = access.getUsers();
@@ -22,5 +22,11 @@ TEST_CASE("Redis") {
     //     utils::checkUser(users[1], 2, "user-2", 20);
     //     utils::checkUser(users[2], 3, "user-3", 30);
     //     utils::checkUser(users[3], 4, "user-4", 40);
+    }
+
+    SUBCASE("getUserById") {
+        std::optional<entity::User> user = access.getUser(1);
+        CHECK(user.has_value());
+        CHECK(user == entity::User{1, "user-1", 10});
     }
 }
