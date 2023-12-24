@@ -8,7 +8,7 @@
 #include <pqxx/pqxx>
 #include <string>
 #include <memory>
-
+#include <optional>
 
 namespace dao {
 
@@ -31,6 +31,25 @@ public:
 
         // done
         return users;
+    }
+
+    std::optional<entity::User> getUser(int id) {
+
+        // query
+        std::string query = fmt::format("SELECT id,name,age FROM user_ WHERE id = {}", id);
+        pqxx::work tx{*_conn};
+
+        try {
+            auto[uid, name, age] = tx.query1<int, std::string, int>(query);
+            return entity::User{uid, name, age};
+
+        } catch(const pqxx::unexpected_rows& err) {
+            fmt::print("[ERROR]: Cannot get user. Requested id {} does not exists", id);
+            return {};
+        }
+
+        // done
+        return {};
     }
 
 private:
