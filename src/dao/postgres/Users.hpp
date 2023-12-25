@@ -2,6 +2,7 @@
 
 // app
 #include "dao/Users.hpp"
+#include "common/utils.hpp"
 
 // deps
 #include <fmt/core.h>
@@ -16,7 +17,11 @@ namespace postgres {
 class Users : public dao::Users {
 public:
     Users() {
-        _conn = connect("localhost", "5432", "admin", "demo123", "data");
+        _conn = connect(utils::getEnvVarOr("postgres.hostname", "localhost"), 
+                        utils::getEnvVarOr("postgres.port", "5432"), 
+                        utils::getEnvVarOr("postgres.user", "admin"), 
+                        utils::getEnvVarOr("postgres.password", "demo123"), 
+                        utils::getEnvVarOr("postgres.database", "data"));
     }
 
     std::vector<entity::User> getUsers() override {

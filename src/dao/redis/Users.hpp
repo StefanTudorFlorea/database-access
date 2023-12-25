@@ -2,6 +2,7 @@
 
 // app
 #include "dao/Users.hpp"
+#include "common/utils.hpp"
 #include "Keys.hpp"
 
 // deps
@@ -19,7 +20,8 @@ namespace redis {
 class Users : public dao::Users {
 public:
     Users() {
-        _redis = connect("localhost", "6379");
+        _redis = connect(utils::getEnvVarOr("redis.hostname", "localhost"), 
+                         utils::getEnvVarOr("redis.port", "6379"));
     }
 
     std::vector<entity::User> getUsers() override {
