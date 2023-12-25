@@ -1,0 +1,4 @@
+HSET 'user:1' name 'user-1' age 10
+HSET 'user:2' name 'user-2' age 20
+HSET 'user:3' name 'user-3' age 30
+HSET 'user:4' name 'user-4' age 40

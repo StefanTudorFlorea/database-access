@@ -9,6 +9,9 @@
 #include <string>
 #include <optional>
 #include <memory>
+#include <unordered_map>
+#include <iterator>
+
 
 namespace dao {
 
@@ -23,9 +26,11 @@ public:
     }
 
     std::optional<entity::User> getUser(int id) override {
-        auto name = _redis->get(fmt::format("user:{}:name", id));
-        auto age = _redis->get(fmt::format("user:{}:age", id));
-        return entity::User{id, *name, std::stoi(*age)};
+
+        std::unordered_map<std::string, std::string> res;
+        _redis->hgetall(fmt::format("user#{}", id), std::inserter(res, res.begin()));
+
+        return entity::User{id, res["name"], std::stoi(res["age"])};
     }
 
 private:
