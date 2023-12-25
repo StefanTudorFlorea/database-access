@@ -16,6 +16,8 @@ public:
 
     virtual std::optional<entity::User> getUser(int id) = 0;
 
+    // virtual int addUser(const std::string& name, int age) = 0;
+
     // virtual void removeUser(int id) = 0;
 
     // virtual void removeUsers() = 0;

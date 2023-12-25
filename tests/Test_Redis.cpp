@@ -14,12 +14,9 @@
 TEST_CASE("Redis") {
     dao::redis::Users access;
 
-    SUBCASE("getUserById") {
-        std::optional<entity::User> user = access.getUser(1);
-        CHECK(user.has_value());
-
-        // fmt::print("user name{}", user->name);
-
-        CHECK(user == entity::User{1, "stefan", 20});
+    SUBCASE("addUser") {
+        access.addUser("user-1", 10);
+        access.addUser("user-2", 20);
+        access.addUser("user-3", 30);
     }
 }

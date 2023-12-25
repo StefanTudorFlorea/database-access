@@ -2,6 +2,7 @@
 
 // app
 #include "dao/Users.hpp"
+#include "Keys.hpp"
 
 // deps
 #include <sw/redis++/redis++.h>
@@ -11,7 +12,6 @@
 #include <memory>
 #include <unordered_map>
 #include <iterator>
-
 
 namespace dao {
 namespace redis {
@@ -26,10 +26,23 @@ public:
         return {};
     }
 
+    int addUser(const std::string& name, int age) {
+        int nextId = _redis->incr(keys::configNextUserId());
+
+        std::unordered_map<std::string, std::string> user {
+            {"name", name},
+            {"age", std::to_string(age)}
+        };
+
+        _redis->hmset(keys::user(nextId), user.begin(), user.end());
+
+        return nextId;
+    }
+
     std::optional<entity::User> getUser(int id) override {
 
         std::unordered_map<std::string, std::string> res;
-        _redis->hgetall(fmt::format("user#{}", id), std::inserter(res, res.begin()));
+        _redis->hgetall(keys::user(id), std::inserter(res, res.begin()));
 
         return entity::User{id, res["name"], std::stoi(res["age"])};
     }
