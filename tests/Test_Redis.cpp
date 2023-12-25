@@ -2,8 +2,7 @@
 #include <doctest/doctest.h>
 
 #include "dao/Users.hpp"
-#include "dao/UsersPostgres.hpp"
-#include "dao/UsersRedis.hpp"
+#include "dao/redis/Users.hpp"
 #include "entity/User.hpp"
 
 #include <fmt/core.h>
@@ -13,7 +12,7 @@
 
 
 TEST_CASE("Redis") {
-    dao::UsersRedis access;
+    dao::redis::Users access;
 
     SUBCASE("getUserById") {
         std::optional<entity::User> user = access.getUser(1);

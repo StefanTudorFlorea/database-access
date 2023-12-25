@@ -1,8 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "dao/Users.hpp"
-#include "dao/UsersPostgres.hpp"
-#include "dao/UsersRedis.hpp"
+#include "dao/postgres/Users.hpp"
 #include "entity/User.hpp"
 
 #include <vector>
@@ -11,7 +10,7 @@
 
 
 TEST_CASE("Postgres") {
-    dao::UsersPostgres access;
+    dao::postgres::Users access;
 
     SUBCASE("getAllUsers") {
         std::vector<entity::User> users = access.getUsers();

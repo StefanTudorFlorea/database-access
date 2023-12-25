@@ -1,7 +1,7 @@
 #pragma once
 
 // app
-#include "Users.hpp"
+#include "dao/Users.hpp"
 
 // deps
 #include <fmt/core.h>
@@ -10,11 +10,12 @@
 #include <memory>
 #include <optional>
 
-namespace dao {
+namespace dao { 
+namespace postgres {
 
-class UsersPostgres : public Users {
+class Users : public dao::Users {
 public:
-    UsersPostgres() {
+    Users() {
         _conn = connect("localhost", "5432", "admin", "demo123", "data");
     }
 
@@ -68,5 +69,6 @@ private:
 private:
     std::unique_ptr<pqxx::connection> _conn;
 };
-    
+
+} // ns postgres
 } // ns dao

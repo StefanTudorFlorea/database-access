@@ -1,7 +1,7 @@
 #pragma once
 
 // app
-#include "Users.hpp"
+#include "dao/Users.hpp"
 
 // deps
 #include <sw/redis++/redis++.h>
@@ -14,10 +14,11 @@
 
 
 namespace dao {
+namespace redis {
 
-class UsersRedis : public Users {
+class Users : public dao::Users {
 public:
-    UsersRedis() {
+    Users() {
         _redis = connect("localhost", "6379");
     }
 
@@ -43,4 +44,5 @@ private:
     std::unique_ptr<sw::redis::Redis> _redis;
 };
 
+} // ns redis
 } // ns dao
