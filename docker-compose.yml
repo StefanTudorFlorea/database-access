@@ -1,5 +1,9 @@
 version: '3'
 
+volumes:
+  persistent-storage:
+    driver: local
+
 services:
   postgres:
     image: postgres:latest
@@ -14,5 +18,10 @@ services:
 
   redis:
     image: redis:latest
+    expose:
+      - 6379
+    volumes:
+        - persistent-storage:/data
+    entrypoint: redis-server --appendonly yes
     ports:
       - 6379:6379
